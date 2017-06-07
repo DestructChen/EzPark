@@ -1,4 +1,5 @@
-[submodule "EzParkApp"]
-	path = EzParkApp
-	url = ./EzParkApp
- ignore = dirty
+[submodule "/EzParkApp"]
+
+path = EzParkApp
+url = git@github.com:DestructChen/EzPark.git
+ignore = dirty
