@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">EzPark</string>
+    <string name="title">EzPark</string>
+
+    <!--main activity-->
+    <string name="title_activity_main">EzPark</string>
+
+
+    <!-- nobluetooth -->
+    <string name="no_bt">Sorry your device does not support Bluetooth. Please exit the app.</string>
+
+    <!-- available spaces-->
+    <string name="title_availableSpaces">Available Spaces</string>
+
+    <!-- parking rates -->
+    <string name="title_parkingRates">Parking Rates</string>
+    <string name="paytheft">If after paying, you do not leave. You will be reported.</string>
+
+
+
+    <!-- paymentsuccess -->
+    <string name="title_paymentsuccess">Finish</string>
+
+
+    <!-- Cancel -->
+    <!-- payment -->
+    <string name="title_payment">Pay</string>
+    <string name="cancel">Cancel</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="get_payment_info">Get Payment Info</string>
+</resources>
