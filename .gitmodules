@@ -1,0 +1,3 @@
+[submodule "EzParkApp"]
+	path = EzParkApp
+	url = ./EzParkApp
