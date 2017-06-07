@@ -1,3 +1,4 @@
 [submodule "EzParkApp"]
 	path = EzParkApp
 	url = ./EzParkApp
+ ignore = dirty
