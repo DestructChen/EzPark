@@ -1,6 +1,6 @@
 # EzPark 
-A uni project for University of Sydney UOS ELEC3607 - Embedded Systems
-For this project we were to create a prototype embedded system
+A project for University of Sydney UOS ELEC3607 - Embedded Systems.
+For this project we were to create a prototype embedded system.
 EzPark is a Bluetooth Parking Reservation System utilising the Arduino DUE as a server and a user is able to connect to it via our Android application with Bluetooth
 
 ### File Information
@@ -15,7 +15,7 @@ With a knowledge of Arduino and the C programming language, the EzPark.ino code 
 For this project we used a [SeeedStudio Bluetooth Module](http://wiki.seeedstudio.com/wiki/Bluetooth_Shield)
 For this Bluetooth Shield, jumper wires were requried to connect the RX pin of the bluetooth module to the TX pin of the arduino board and similarly the TX pin of the bluetooth module to the RX pin of the arduino board.
 
-For this project, the Pin Assignment is as follows
+For this project, the pin assignment is as follows. If you use different pin assignments, you will need to change the corresponding global constant integer.
 
 | Hardware | Pin # |
 | --- | --- |
@@ -23,3 +23,22 @@ For this project, the Pin Assignment is as follows
 | Trig | 11 |
 | Echo | 12 |
 | Servo Motor | 13 |
+
+The seven segment display(SSD) used may vary with the one you use.
+The one we used was connected as below
+
+| SSD segment| Arduino pin |
+| --- | --- | 
+|  a | 4 |
+| b | 5 |
+| c | 6 | 
+| d | 7 |
+| e | 8 | 
+| f | 10 |
+| g | 9 |
+
+Ideally the seven segment display should be connected in a sequential order on the arduino for easier pin assignment in the arduino code. 
+
+![](ssd.png)
+
+
