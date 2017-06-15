@@ -12,7 +12,9 @@ import java.util.ArrayList;
  * Created by David on 31/05/2017.
  */
 
-/*Displays the set parking rates*/
+/*Displays the set parking rates
+* gets the rates from MyApp.java
+* */
 
 public class parkingrates extends Activity {
 
@@ -35,6 +37,7 @@ public class parkingrates extends Activity {
         listRates();
 
     }
+
 
     public void listRates() {
         ArrayList<String> list = new ArrayList<String>();

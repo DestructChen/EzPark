@@ -8,7 +8,7 @@ import java.util.UUID;
 
 /*
 The purpose of this application is to manage global data across the different activities.
-The main benefit of this, is so that the bluetooth connection can be maintained across different activities (i.e the different screens of the app)
+The main benefit of this, is so that the bluetooth connection can be sustained across different activities (i.e the different screens of the app)
 */
 
 public class MyApp extends Application {
@@ -31,10 +31,12 @@ public class MyApp extends Application {
 
     private static final String[] MAClist= new String[]{
             "00:6A:8E:16:C7:B1"
+
     };
 
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private static final int numdevices = 1;
+
+    private static final int numdevices = MAClist.length;
 
     public int getNumdevices(){
         return numdevices;

@@ -18,6 +18,7 @@ import android.bluetooth.BluetoothSocket;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import android.widget.ToggleButton;
 
 //datatypes
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
 //exception types
@@ -47,6 +49,7 @@ public class MainActivity extends Activity {
     private BluetoothAdapter BA;
     public static String address; //address refers to the current MAC address of the connected module
     ToggleButton bttoggle; //bluetooth enable toggle
+    EditText ed;
 
     Spinner devicelist; //dropdown of MAClist
 
@@ -54,7 +57,7 @@ public class MainActivity extends Activity {
     public BluetoothSocket btSocket = null;
     public BluetoothDevice btDevice;
     boolean isBtConnected = false;
-
+    Set<BluetoothDevice> pairedDevices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,9 @@ public class MainActivity extends Activity {
         MAClist = app.getMAClist();
         numdevices = app.getNumdevices();
         MY_UUID = app.getMyUuid();
+        ed = (EditText)findViewById(R.id.bluetoothmac);
 
+        pairedDevices = BA.getBondedDevices();
         if (ignoreBTforemulator == true) {
 
         } else if (BA == null) { //if the android device does not have a bluetooth adapater, then show an error page
@@ -124,9 +129,14 @@ public class MainActivity extends Activity {
     public void list() {
         ArrayList<String> list = new ArrayList<String>();
         list.add(0, "Connect to arduino"); //default text
-        for (int i = 1; i < numdevices + 1; i++) {
+       for (int i = 1; i < numdevices + 1; i++) {
             list.add(i, "Module " + i + " " + MAClist[i - 1]);
         }
+
+
+        /*for(BluetoothDevice bt : pairedDevices) {
+           list.add(bt.getName());
+        }*/
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -143,8 +153,15 @@ public class MainActivity extends Activity {
             if (BA.isEnabled()) {
                 if (position != 0) {
                     String info = ((TextView) view).getText().toString();
-                    address = info.substring(info.length() - 17);
+                    //address = info.substring(info.length() - 17);
+                 /*   for(BluetoothDevice bt : pairedDevices) {
 
+                        if(info.equals(bt.getName())){
+                           // msg(bt.getName());
+                            address=bt.getAddress().toString();
+
+                        }
+                    }*/address = ed.getText().toString();
 
                         new ConnectBT().execute();
 
@@ -163,6 +180,15 @@ public class MainActivity extends Activity {
 
         }
     };
+
+    public void alterMac(View v){
+        msg("a");
+        String mac = ed.getText().toString();
+         MAClist= new String[]{
+                mac
+        };
+        list();
+    }
 
     //Start Reservation button's Onclick will execute this function
     //check if connected to arduino first
@@ -216,6 +242,7 @@ public class MainActivity extends Activity {
         @Override
         protected void onPreExecute() {
             progress = ProgressDialog.show(MainActivity.this, "Connecting...", "Please wait!!!");  //show a progress dialog
+
         }
 
         @Override
@@ -241,8 +268,8 @@ public class MainActivity extends Activity {
                         app.setBTSocket(btSocket);                                          //set the global bluetooth socket connection
                     }
                 }
-            } catch (IOException e) {
-                msg("That device may not be available");
+            } catch (Exception e) {
+               // msg("That device may not be available");
             }
 
             return null;
@@ -251,6 +278,7 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(Void result) //after the doInBackground, display result msg
         {
+
             super.onPostExecute(result);
 
             if (btSocket.getRemoteDevice().getAddress().equals(address)) {
@@ -263,7 +291,6 @@ public class MainActivity extends Activity {
 
             }
             progress.dismiss();
-
 
         }
     }

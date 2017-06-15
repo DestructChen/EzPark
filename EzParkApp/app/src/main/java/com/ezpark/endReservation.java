@@ -96,7 +96,7 @@ public class endReservation extends Activity{
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
         lv.setAdapter(adapter);
     }
-
+    //when get payment info button is clicked, check for input
     public void requestInfo(View v){
         plateNumber = et.getText().toString();
         if(plateNumber.length()==0 ) {
@@ -114,7 +114,7 @@ public class endReservation extends Activity{
 
 
     }
-
+    //executes tasks in order
     private class retrieveInfo extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute()
@@ -150,7 +150,7 @@ public class endReservation extends Activity{
         }
 
     }
-
+    //displays info, updates when called.
     public void listInfo() {
 
             list.set(0, "Start Time : " + startTimeString); //default text
@@ -160,7 +160,7 @@ public class endReservation extends Activity{
         adapter.notifyDataSetChanged();
 
     }
-
+    //request start time from arduino
     public void requestDuration(){
 
 
@@ -188,7 +188,7 @@ public class endReservation extends Activity{
         }
 
     }
-
+    //get data from arduino, calculate payment info, then display
     public void receiveDuration(){
 
         if (btSocket != null) {
@@ -252,6 +252,8 @@ public class endReservation extends Activity{
         }
     }
 
+    //user ends reservation, checks if user has retrieved payment info yet
+    //no real payment system, after 3s delay, goes to open door page
     public void pay(View v) {
         if(plateNumber==null){
             msg("please enter plate number");
@@ -285,7 +287,7 @@ public class endReservation extends Activity{
         new openDoorSequence().execute();
         msg("Door will close in 15s automatically");
     }
-
+    //notify arduino, reservation has ended
     public void requestOpenDoor() {
         if (btSocket != null) {
             try {
@@ -299,6 +301,7 @@ public class endReservation extends Activity{
         }
     }
 
+    //receive confirmation door has been opened
     public void receiveDoorStatus(){
         if(btSocket!=null){
             try {
@@ -365,7 +368,7 @@ public class endReservation extends Activity{
     }
 
 
-
+    //return to home
     public void Cancel(View v){
         try {
             finish();
@@ -375,7 +378,7 @@ public class endReservation extends Activity{
     }
 
 
-
+    //displays s as a message on screen
     private void msg(String s)
     {
         Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();

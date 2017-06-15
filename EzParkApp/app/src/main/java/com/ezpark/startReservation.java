@@ -32,6 +32,14 @@ import java.util.StringTokenizer;
  * Created by David on 30/05/2017.
  */
 
+/**
+ * Begin reservation
+ * Displays status of parking spaces
+ * registers a new user
+ * Step 1 : select a vacant positon
+ * Step 2 : enter platenumber
+ * Step 3 : click register user button
+ */
 
 public class startReservation extends Activity {
     public InputStream in = null;
@@ -39,7 +47,7 @@ public class startReservation extends Activity {
     public BluetoothSocket btSocket;
     private MyApp app;
 
-    TextView receiveabc;
+    TextView receiveplate;
     String plateNumber;
     String command;
     int selectedposition;
@@ -61,7 +69,7 @@ public class startReservation extends Activity {
         }
 
 
-        receiveabc = (TextView) findViewById(R.id.textreceive);
+        receiveplate = (TextView) findViewById(R.id.textreceive);
 
         gridView = (GridView) findViewById(R.id.gridview);
         spacelist = new ArrayList<String>();
@@ -69,7 +77,9 @@ public class startReservation extends Activity {
 
         selectedposition = -1;
         gridView.setAdapter(adapter);
-        new retrieveSpacesInfo().execute();
+        new retrieveSpacesInfo().execute(); //onload, app will query to arduino to return available spaces
+
+        //sets the selected position
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
@@ -86,6 +96,7 @@ public class startReservation extends Activity {
 
     }
 
+    //request to arduino to get spaces
     public void requestSpaces() {
 
         if (btSocket != null) {
@@ -107,14 +118,14 @@ public class startReservation extends Activity {
 
     }
 
-
+    //receive arduino data and append to a list
+    //incoming data is in returned with first value as numberofspaces followed by 0 & 1s for each space to indicate vacancy
     public void receiveSpaces() {
         try {
             in = btSocket.getInputStream();
             DataInputStream mmInStream = new DataInputStream(in);
             byte[] buffer = new byte[256];
             if (mmInStream.available() > 0) {
-
 
                 int numbytes = mmInStream.read(buffer);
 
@@ -142,12 +153,12 @@ public class startReservation extends Activity {
         }
     }
 
-
+    //end activity. return to previous
     public void home(View v) {
         finish();
     }
 
-
+    //performs task in order
     private class retrieveSpacesInfo extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -157,22 +168,19 @@ public class startReservation extends Activity {
         @Override
         protected Void doInBackground(Void... urls) {
             requestSpaces();
-
-
             return null;
         }
 
+
+        //3 second delay to appropriately account for response time from arduino
         @Override
         protected void onPostExecute(Void result) {
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
-
                     receiveSpaces();
-
                     pd.dismiss();
-
 
                 }
             }, 3000); // 3000 milliseconds delay
@@ -181,7 +189,7 @@ public class startReservation extends Activity {
         }
 
     }
-
+    //performs task in order
     private class registerInfo extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -196,27 +204,23 @@ public class startReservation extends Activity {
             return null;
         }
 
+        //3 second delay to appropriately account for response time from arduino
         @Override
         protected void onPostExecute(Void result) {
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
-
                     receiveRegisteredUser();
-
                     pd.dismiss();
-
 
                 }
             }, 3000); // 3000 milliseconds delay
 
-
         }
-
     }
 
-
+    //send registeruser data to arduino
     public void requestRegisterUser() {
 
         if (btSocket != null) {
@@ -234,6 +238,7 @@ public class startReservation extends Activity {
         }
     }
 
+    //receive status data from arduino
     public void receiveRegisteredUser() {
         byte[] buffer = new byte[256];  // buffer store for the stream
         if (btSocket != null) {
@@ -263,10 +268,13 @@ public class startReservation extends Activity {
         }
     }
 
+    //when registeruser button is clicked
+    //check platenumber is in correct format etc.
+    // ensure a spot has been selected
 
     public void registeruser(View v) {
 
-        plateNumber = receiveabc.getText().toString();
+        plateNumber = receiveplate.getText().toString();
         if (plateNumber.length() == 0) {
             msg("Nothing entered");
         } else if (plateNumber.length() < 4 || plateNumber.length() > 8) {
@@ -279,15 +287,11 @@ public class startReservation extends Activity {
             } else {
                 new registerInfo().execute();
             }
-
         }
     }
 
-
+    //function that recieves string and outputs as a toast (a message on screen)
     private void msg(String s) {
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
     }
 }
-
-
-

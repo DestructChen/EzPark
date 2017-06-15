@@ -106,6 +106,16 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/toggleButton"
         android:layout_toEndOf="@+id/toggleButton" />
+    <EditText
+        android:id="@+id/bluetoothmac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter MAC number"
+        android:layout_above="@+id/buttonspaces"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="44dp" />
+
 
 
 </RelativeLayout>
