@@ -14,6 +14,12 @@ With a knowledge of Arduino and the C programming language, the EzPark.ino code 
 ##EzPark Arduino
 For this project we used a [SeeedStudio Bluetooth Module](http://wiki.seeedstudio.com/wiki/Bluetooth_Shield)
 For this Bluetooth Shield, jumper wires were requried to connect the RX pin of the bluetooth module to the TX pin of the arduino board and similarly the TX pin of the bluetooth module to the RX pin of the arduino board.
+<Servo Library>
+    This library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation;
+    either version 2.1 of the License, or (at your option) any later version.
+    Reference to  Official Documentation at :
+        https://github.com/arduino-libraries/Servo
+        https://www.arduino.cc/en/Reference/Servo
 
 For this project, the pin assignment is as follows. If you use different pin assignments, you will need to change the corresponding global constant integer.
 
