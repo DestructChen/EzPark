@@ -1,3 +1,5 @@
+//Unfinished readme.
+
 # EzPark 
 A project for University of Sydney UOS ELEC3607 - Embedded Systems.
 For this project we were to create a prototype embedded system.
