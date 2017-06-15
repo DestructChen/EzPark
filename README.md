@@ -1,4 +1,7 @@
+[ignore]
 //Unfinished readme.
+//feel free to download for fun
+//Please refrain from directly copying for your assignments and use this project as a guide :)  
 
 # EzPark 
 A project for University of Sydney UOS ELEC3607 - Embedded Systems.
