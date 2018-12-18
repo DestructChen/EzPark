@@ -1,7 +1,11 @@
 [ignore]
 //Unfinished readme.
+
 //feel free to download for fun
+
 //Please refrain from directly copying for your assignments and use this project as a guide :)  
+
+[Youtube demo](https://www.youtube.com/watch?v=t4eohl4E-Bs)
 
 # EzPark 
 A project for University of Sydney UOS ELEC3607 - Embedded Systems.
@@ -16,7 +20,7 @@ The EzPark.ino file is an arduino code file. To open the file download the [Ardu
 With a knowledge of Arduino and the C programming language, the EzPark.ino code should be straight forward to follow. The code was created on use of an Arduino DUE however, the code is simplistic and should be compatible with most Arduino devices.
 
 
-##EzPark Arduino
+## EzPark Arduino
 For this project we used a [SeeedStudio Bluetooth Module](http://wiki.seeedstudio.com/wiki/Bluetooth_Shield)
 For this Bluetooth Shield, jumper wires were requried to connect the RX pin of the bluetooth module to the TX pin of the arduino board and similarly the TX pin of the bluetooth module to the RX pin of the arduino board.
 <Servo Library>
